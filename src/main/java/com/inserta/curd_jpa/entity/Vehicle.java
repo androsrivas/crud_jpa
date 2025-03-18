@@ -1,25 +1,21 @@
 package com.inserta.curd_jpa.entity;
 
-public class Vehicle {
+public abstract class Vehicle {
+
     private String brand;
     private String model;
     private String carRegistration;
 
-    public Vehicle() {
-    }
-
-    public Vehicle(String carRegistration, String model, String brand) {
-        this.carRegistration = carRegistration;
-        this.model = model;
+    // Constructor
+    public Vehicle(String brand, String model, String carRegistration) {
         this.brand = brand;
+        this.model = model;
+        this.carRegistration = carRegistration;
     }
 
+    // Getters
     public String getBrand() {
         return brand;
-    }
-
-    public void setBrand(String brand) {
-        this.brand = brand;
     }
 
     public String getModel() {
@@ -30,16 +26,19 @@ public class Vehicle {
         return carRegistration;
     }
 
+    // Setters
+    public void setBrand(String brand) {
+        this.brand = brand;
+    }
+
+    public void setModel(String model) {
+        this.model = model;
+    }
+
     public void setCarRegistration(String carRegistration) {
         this.carRegistration = carRegistration;
     }
 
-    @Override
-    public String toString() {
-        return "Vehicle{" +
-                "brand='" + brand + '\'' +
-                ", model='" + model + '\'' +
-                ", carRegistration='" + carRegistration + '\'' +
-                '}';
-    }
+    // Método abstracto (a implementar por las subclases)
+    public abstract void displayVehicleDetails();
 }
