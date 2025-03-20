@@ -9,5 +9,5 @@ public interface VehicleDAO {
     Vehicle findById(Integer id);
 
     void delete(Vehicle vehicle);
-    Vehicle delete()
+    Vehicle delete(Integer id);
 }

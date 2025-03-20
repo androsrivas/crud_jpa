@@ -20,7 +20,13 @@ public class VehicleDAOImpl implements VehicleDAO{
 
     @Override
     public Vehicle findById(Integer id) {
-        return null;
+        return this.entityManager.find(Vehicle.class, id);
+    }
+
+    @Override
+    @Transactional
+    public void delete(Vehicle vehicle) {
+        return this.entityManager.delete(Vehicle.class);
     }
 
 }
