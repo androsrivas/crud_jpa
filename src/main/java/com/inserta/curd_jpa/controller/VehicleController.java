@@ -42,7 +42,7 @@ public class VehicleController {
                 .orElse(ResponseEntity.notFound().build());
     }
 
-    // POST - Crear un artículo
+    // POST - Crear un vehiculo
     @PostMapping
     @Transactional
     public Vehicle createVehicle(@RequestBody Vehicle vehicle) {
@@ -50,15 +50,15 @@ public class VehicleController {
     }
 
 
-    // PUT - Actualizar un artículo
+    // PUT - Actualizar un vehiculo
     @Transactional
     public ResponseEntity<Vehicle> updateArticle(@PathVariable int id, @RequestBody Vehicle vehicleDetails) {
-        return vehicleRepository.findById(id).map(article -> {
+        return vehicleRepository.findById(id).map(vehicle -> {
             vehicle.setBrand(vehicleDetails.getBrand());
             vehicle.setModel(vehicleDetails.getModel());
             vehicle.setCarRegistration(vehicleDetails.getCarRegistration());
             vehicle.setType(vehicleDetails.getCarRegistration());
-            vehicle updatedArticle = vehicleDetails.save(vehicle);
+            Vehicle updatedArticle = vehicleRepository.save(vehicle);
             return ResponseEntity.ok(updatedArticle);
         }).orElse(ResponseEntity.notFound().build());
     }
