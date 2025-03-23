@@ -3,7 +3,7 @@ package com.inserta.curd_jpa;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-@SpringBootApplication
+@SpringBootApplication(scanBasePackages = "com.inserta.curd_jpa")
 public class CurdJpaApplication {
 
 	public static void main(String[] args) {
