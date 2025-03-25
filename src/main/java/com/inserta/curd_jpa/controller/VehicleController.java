@@ -10,7 +10,7 @@ import org.springframework.http.ResponseEntity;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/vehicles")
+@RequestMapping("/api/vehiculo")
 public class VehicleController {
 
     private final VehicleRepository vehicleRepository;
