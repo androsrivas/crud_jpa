@@ -10,7 +10,7 @@ import org.springframework.http.ResponseEntity;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/vehiculo")
+@RequestMapping("api")
 public class VehicleController {
 
     private final VehicleRepository vehicleRepository;
@@ -18,23 +18,16 @@ public class VehicleController {
     public VehicleController(VehicleRepository vehicleRepository) { this.vehicleRepository = vehicleRepository; }
 
     // GET - Obtener todos los artículos
-    @GetMapping
+    @GetMapping("vehicle")
     @Transactional(readOnly = true)
     public List<Vehicle> getAllArticles() {
         return vehicleRepository.findAll();
     }
 
-    // GET - Obtener un artículo por ID
-    @GetMapping("/{id}")
-    @Transactional(readOnly = true)
-    public ResponseEntity<Vehicle> getId(@PathVariable int id) {
-        return vehicleRepository.findById(id)
-                .map(ResponseEntity::ok)
-                .orElse(ResponseEntity.notFound().build());
-    }
+
 
     // GET - Obtener un artículo por ID
-    @GetMapping("/{id}")
+    @GetMapping("vehicle/{id}")
     @Transactional(readOnly = true)
     public ResponseEntity<Vehicle> getArticleById(@PathVariable int id) {
         return vehicleRepository.findById(id)
@@ -43,28 +36,30 @@ public class VehicleController {
     }
 
     // POST - Crear un vehiculo
-    @PostMapping
+    @PostMapping("vehicle")
     @Transactional
     public Vehicle createVehicle(@RequestBody Vehicle vehicle) {
         return vehicleRepository.save(vehicle);
     }
 
 
-    // PUT - Actualizar un vehiculo
+    // PUT - Actualizar un vehículo
+    @PutMapping("vehicle/{id}")
     @Transactional
     public ResponseEntity<Vehicle> updateArticle(@PathVariable int id, @RequestBody Vehicle vehicleDetails) {
         return vehicleRepository.findById(id).map(vehicle -> {
             vehicle.setBrand(vehicleDetails.getBrand());
             vehicle.setModel(vehicleDetails.getModel());
             vehicle.setCarRegistration(vehicleDetails.getCarRegistration());
-            vehicle.setType(vehicleDetails.getCarRegistration());
+            vehicle.setType(vehicleDetails.getType());
             Vehicle updatedArticle = vehicleRepository.save(vehicle);
             return ResponseEntity.ok(updatedArticle);
         }).orElse(ResponseEntity.notFound().build());
     }
 
+
     // DELETE - Eliminar un artículo
-    @DeleteMapping("/{id}")
+    @DeleteMapping("vehicle/{id}")
     @Transactional
     public ResponseEntity<Void> deleteVehicle(@PathVariable int id) {
         if (vehicleRepository.existsById(id)) {
@@ -75,10 +70,5 @@ public class VehicleController {
     }
 
 
-    //POST - Crear n articulos de golpe
-    @PostMapping("/bulk")
-    @Transactional
-    public List<Vehicle> createArticles(@RequestBody List<Vehicle> vehicles) {
-        return vehicleRepository.saveAll(vehicles);
-    }
+
 }
